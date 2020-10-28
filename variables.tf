@@ -25,6 +25,12 @@ variable "public_subnets" {
 }
 
 variable "aws_region" {
-  type    = string
-  default = "us-east-1"
+  type        = string
+  description = "AWS Region to use"
+  default     = "us-east-1"
+}
+
+variable "ami" {
+  type        = string
+  description = "AMI for web ec2 instances"
 }
