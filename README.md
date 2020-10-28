@@ -14,8 +14,9 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| ami | AMI for web ec2 instances | `string` | n/a | yes |
 | availability\_zone\_names | (Optional) A list of availability zones names or ids in the region | `list` | `[]` | no |
-| aws\_region | n/a | `string` | `"us-east-1"` | no |
+| aws\_region | AWS Region to use | `string` | `"us-east-1"` | no |
 | cidr | (Required)  The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | `string` | n/a | yes |
 | environment | (Required) Environment name for tagging purposes | `string` | n/a | yes |
 | private\_subnets | (Required) A list of private subnets inside the VPC | `list` | n/a | yes |
