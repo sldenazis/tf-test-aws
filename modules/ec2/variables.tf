@@ -41,7 +41,8 @@ variable "exposed_port" {
   description = "Service port number to expose. Mandatory if create_alb_attachment is true."
   default     = 80
 }
-gvariable "create_alb_attachment" {
+
+variable "create_alb_attachment" {
   type        = bool
   description = "Decide wheter or not we attach the instance to the alb target group"
   default     = true
