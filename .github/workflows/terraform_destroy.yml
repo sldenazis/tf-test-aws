@@ -12,8 +12,8 @@ env:
   TERRAFORM_VERSION: 0.13.5
 
 jobs:
-  terraform_plan:
-    name: Terraform validations
+  terraform_destroy:
+    name: Terraform destroy
     runs-on: ubuntu-latest
 
     steps:
