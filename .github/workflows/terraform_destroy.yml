@@ -1,4 +1,4 @@
-name: 'Terraform apply'
+name: 'Terraform destroy'
 
 on:
   push:
@@ -47,6 +47,6 @@ jobs:
             -backend-config="key=${{ secrets.S3_KEY }}"
         id: init
 
-      - name: 'Terraform apply'
+      - name: 'Terraform destroy'
         run: terraform destroy -auto-approve
         id: apply

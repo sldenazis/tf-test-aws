@@ -38,10 +38,6 @@ jobs:
         with:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
 
-      - name: 'Terraform fmt'
-        run: terraform fmt
-        id: fmt
-
       - name: 'Terraform init'
         run: |
           terraform init \
@@ -50,10 +46,6 @@ jobs:
             -backend-config="bucket=${{ secrets.S3_BUCKET }}" \
             -backend-config="key=${{ secrets.S3_KEY }}"
         id: init
-
-      - name: 'Terraform validate'
-        run: terraform validate -no-color
-        id: validate
 
       - name: 'Terraform plan'
         run: terraform plan -out plan.out
