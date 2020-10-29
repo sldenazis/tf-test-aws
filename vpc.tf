@@ -3,11 +3,11 @@ module "vpc" {
 
   environment = var.environment
 
-  cidr = var.cidr
-  azs  = var.availability_zone_names
+  cidr = var.vpc_cidr
+  azs  = var.vpc_availability_zone_names
 
-  private_subnets = var.private_subnets
-  public_subnets  = var.public_subnets
+  private_subnets = var.vpc_private_subnets
+  public_subnets  = var.vpc_public_subnets
 
   enable_nat_gateway = true
 }

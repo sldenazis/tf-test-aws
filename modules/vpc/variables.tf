@@ -24,11 +24,6 @@ variable "public_subnets" {
   description = "(Required) A list of public subnets inside the VPC"
 }
 
-variable "aws_region" {
-  type    = string
-  default = "us-east-1"
-}
-
 variable "enable_vpn_gateway" {
   type        = bool
   description = "Should be true if you want to create a new VPN Gateway resource and attach it to the VPC"

@@ -17,3 +17,14 @@ variable "subnets" {
   type        = list(string)
   description = "A list of VPC Subnet IDs to launch in"
 }
+
+variable "security_group_ids" {
+  type        = list(string)
+  description = "List of security group id to associate with the ALB"
+}
+
+variable "create_security_group" {
+  type        = bool
+  description = "Decide wheter or not we create a default security group for the ALB."
+  default     = false
+}

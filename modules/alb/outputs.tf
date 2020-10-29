@@ -1,6 +1,6 @@
 output "sg_id" {
-  description = "The ID of the alb security group"
-  value       = aws_security_group.security_group.id
+  description = "The ID of the default ALB security group if created"
+  value       = concat(aws_security_group.security_group.*.id, [""])[0]
 }
 
 output "address" {

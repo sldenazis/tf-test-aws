@@ -1,0 +1,52 @@
+name: 'Terraform apply'
+
+on:
+  push:
+    tags:
+      - destroy-*
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  TERRAFORM_VERSION: 0.13.5
+
+jobs:
+  terraform_plan:
+    name: Terraform validations
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+        
+      - name: "Run tfsec analysis"
+        uses: reviewdog/action-tfsec@master
+        with:
+          github_token: ${{ env.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: "false"
+          filter_mode: "nofilter"
+
+      - name: 'Use Node.js 12.x'
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: 'Use terraform ${{ env.TERRAFORM_VERSION }}'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: 'Terraform init'
+        run: |
+          terraform init \
+            -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}" \
+            -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}" \
+            -backend-config="bucket=${{ secrets.S3_BUCKET }}" \
+            -backend-config="key=${{ secrets.S3_KEY }}"
+        id: init
+
+      - name: 'Terraform apply'
+        run: terraform destroy -auto-approve
+        id: apply

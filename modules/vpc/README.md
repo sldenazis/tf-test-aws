@@ -1,5 +1,27 @@
 # VPC Module
 
+## Description
+
+This module creates a vpc and it's subnets
+
+## Examples
+
+```terraform
+module "vpc" {
+  source = "./modules/vpc/"
+
+  environment = "production"
+
+  cidr = "10.0.0.0/16"
+  azs  = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  public_subnets  = ["10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
+
+  enable_nat_gateway = true
+}
+```
+
 ## Requirements
 
 No requirements.
@@ -12,7 +34,6 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aws\_region | n/a | `string` | `"us-east-1"` | no |
 | azs | (Optional) A list of availability zones names or ids in the region | `list` | `[]` | no |
 | cidr | (Required)  The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden | `string` | n/a | yes |
 | enable\_nat\_gateway | Should be true if you want to provision NAT Gateways for each of your private networks | `bool` | `true` | no |
@@ -29,4 +50,5 @@ No provider.
 | id | The ID of the VPC |
 | private\_subnets | List of IDs of private subnets |
 | public\_subnets | List of IDs of private subnets |
+| sg\_id | The default vpc security group |
 

@@ -36,16 +36,27 @@ variable "vpc_id" {
   description = "The VPC ID"
 }
 
-variable "exposed_port" {
-  type        = number
-  description = "Service port number to expose. Mandatory if create_alb_attachment is true."
-  default     = 80
+variable "vpc_security_group_id" {
+  type = string
+  description = "The default vpc security group id"
+}
+
+variable "additional_security_groups_ids" {
+  type = list(string)
+  description = "List of additional security group ids to attach to the instance."
+  default = []
 }
 
 variable "create_alb_attachment" {
   type        = bool
-  description = "Decide wheter or not we attach the instance to the alb target group"
+  description = "Decide wheter or not we attach the instance to the alb target group."
   default     = true
+}
+
+variable "create_security_group" {
+  type = bool
+  description = "Decide wheter or not we create a default security group for the ec2 instance."
+  default = false
 }
 
 variable "target_group_arn" {
@@ -54,7 +65,8 @@ variable "target_group_arn" {
   default     = null
 }
 
-variable "cidr_blocks" {
-  type        = list(string)
-  description = "(Required) List of CIDR blocks."
+variable "http_port" {
+  type = number
+  description = "TCP port for http service"
+  default = 80
 }
