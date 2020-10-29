@@ -1,7 +1,7 @@
 module "nginx" {
   source = "./modules/ec2-web/"
 
-  name = format("nginx-%s", var.environment)
+  name = "nginx"
 
   ami                   = var.ami
   vpc_id                = module.vpc.id
@@ -20,7 +20,7 @@ module "nginx" {
 module "apache" {
   source = "./modules/ec2-web/"
 
-  name = format("apache-%s", var.environment)
+  name = "apache"
 
   ami                   = var.ami
   vpc_id                = module.vpc.id

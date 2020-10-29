@@ -10,7 +10,7 @@ This module creates ec2 instances and optionally attach them to an ALB using the
 module "web" {
   source = "./modules/ec2-web/"
 
-  name = format("web-%s", var.environment)
+  name = "web"
 
   ami                   = "ami-id"
   vpc_id                = "vpc-id"
