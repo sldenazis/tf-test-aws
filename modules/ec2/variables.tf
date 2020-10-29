@@ -51,4 +51,10 @@ variable "create_alb_attachment" {
 variable "target_group_arn" {
   type        = string
   description = "The ARN of the target group with which to register targets. Mandatory if create_alb_attachment is true."
+  default     = null
+}
+
+variable "cidr_blocks" {
+  type        = list(string)
+  description = "(Required) List of CIDR blocks."
 }
